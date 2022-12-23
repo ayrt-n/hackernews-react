@@ -13,6 +13,16 @@ const CREATE_LINK_MUTATION = gql`
       createdAt
       url
       description
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
     }
   }
 `;
@@ -38,6 +48,7 @@ function CreateLink() {
         query: FEED_QUERY,
         data: {
           feed: {
+            ...data.feed,
             links: [post, ...data.feed.links]
           }
         },
